@@ -11,8 +11,9 @@ def mostrar_menu():
     print("4. Registrar marcador de un partido")
     print("5. Ver equipo con más goles a favor")
     print("6. Ver equipo con más goles en contra")
-    print("7. Ver tabla posiciones")
-    print("8. Salir")
+    print("7. Ver plantilla de un equipo")
+    print("8. Ver tabla posiciones")
+    print("9. Salir")
 
 def ingresar_equipos(equipos):
     nombre = input("Ingrese el nombre del equipo: ")
@@ -37,7 +38,7 @@ def registrar_plantilla(equipos):
     plantilla = []
 
     while True:
-        print("\nRegistrando un nuevo jugador.")
+        print("Registrando un nuevo jugador.")
         nombre_jugador = input("Introduce el nombre del jugador (o presiona 'Enter' para finalizar): ").strip()
 
         if nombre_jugador == "":
@@ -54,7 +55,7 @@ def registrar_plantilla(equipos):
     equipos[nombre_equipo]["plantilla"] = plantilla
     print(f"Plantilla de '{nombre_equipo}' registrada con éxito.")
     for jugador in plantilla:
-        print(f"{jugador['nombre']} - Dorsal: {jugador['dorsal']}, Posición: {jugador['posicion']}, Edad: {jugador['edad']}, Centro Médico: {jugador['centro_medico']}")
+        print(f"{jugador['nombre']} - Dorsal: {jugador['dorsal']}, Posición: {jugador['posicion']}, Edad: {jugador['edad']}")
 
 
 
@@ -137,6 +138,24 @@ def equipo_com_mas_goles_contra(equipos):
 
     equipo_max_GC = max(equipos, key=lambda e: equipos[e]['GC'])
     print(f"El equipo con más goles en contra es: {equipo_max_GC} ({equipos[equipo_max_GC]['GC']} goles).")
+
+def ver_plantilla(equipos):
+    nombre_equipo = input("Introduce el nombre del equipo para ver su plantilla: ").strip()
+
+    if nombre_equipo not in equipos:
+        print("Error: El equipo no está registrado.")
+        return
+
+    plantilla = equipos[nombre_equipo].get("plantilla", [])
+    if not plantilla:
+        print(f"El equipo {nombre_equipo} no tiene jugadores registrados en su plantilla.")
+        return
+
+    print(f"Plantilla del equipo {nombre_equipo}:")
+    for jugador in plantilla:
+        print(f"{jugador['nombre']} - Dorsal: {jugador['dorsal']}, Posición: {jugador['posicion']}, Edad: {jugador['edad']}")
+
+
 def mostrar_tabla_posiciones(equipos):
     if not equipos:
         print("No hay equipos registrados.")
@@ -180,9 +199,11 @@ def mainMenu():
             equipo_com_mas_goles_a_favor(equipos)
         elif opcion == '6':
             equipo_com_mas_goles_contra(equipos)
-        elif opcion == '7':
-            mostrar_tabla_posiciones(equipos)
         elif opcion == '8':
+            mostrar_tabla_posiciones(equipos)
+        elif opcion == '7':
+            ver_plantilla(equipos)
+        elif opcion == '9':
             print("Saliendo del programa. ¡Hasta pronto!")
         else:
             print("Opción no válida. Inténtalo de nuevo.")
