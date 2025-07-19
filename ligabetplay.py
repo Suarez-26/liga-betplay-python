@@ -2,7 +2,7 @@ import os
 
 def limpiar_consola():
     os.system('cls' if os.name == 'nt' else 'clear')
-
+# Liga BetPlay - Un programa para gestionar equipos de fútbol, plantillas y partidos.
 def mostrar_menu():
     print("--- BIENVENIDO A LA LIGA BETPLAY ---")
     print("1. Registrar equipo")
@@ -14,7 +14,7 @@ def mostrar_menu():
     print("7. Ver plantilla de un equipo")
     print("8. Ver tabla posiciones")
     print("9. Salir")
-
+# Ingresar equipos y sus estadísticas
 def ingresar_equipos(equipos):
     nombre = input("Ingrese el nombre del equipo: ")
     if nombre in equipos:
@@ -25,7 +25,7 @@ def ingresar_equipos(equipos):
     else:
         print("Error: El nombre del equipo no puede estar vacío.")
 
-
+# Registrar plantilla de jugadores para un equipo
 def registrar_plantilla(equipos):
     nombre_equipo = input("Introduce el nombre del equipo para registrar su plantilla: ").strip()
 
@@ -58,7 +58,7 @@ def registrar_plantilla(equipos):
         print(f"{jugador['nombre']} - Dorsal: {jugador['dorsal']}, Posición: {jugador['posicion']}, Edad: {jugador['edad']}")
 
 
-
+# Definir fecha de partido
 def definir_encuentro(equipos, fechas):
     if len(equipos) < 2:
         print("Error: Debe haber al menos dos equipos registrados.")
@@ -78,6 +78,7 @@ def definir_encuentro(equipos, fechas):
         fechas.append(partido)
         print(f"Partido '{local} vs {visitante}' programado con éxito para {fecha}.")
 
+# Registrar marcador de un partido
 def registrar_marcador(equipos, fechas):
     pendientes = [p for p in fechas if p["marcador_local"] is None]
     if not pendientes:
@@ -124,6 +125,7 @@ def registrar_marcador(equipos, fechas):
     except ValueError:
         print("Error: Debes introducir un número.")
 
+# Ver equipo con más goles a favor
 def equipo_com_mas_goles_a_favor(equipos):
     if not equipos:
         print("No hay equipos registrados.")
@@ -131,6 +133,7 @@ def equipo_com_mas_goles_a_favor(equipos):
     equipo_max_GF = max(equipos, key=lambda e: equipos[e]['GF'])
     print(f"El equipo con más goles a favor es: {equipo_max_GF} ({equipos[equipo_max_GF]['GF']} goles).")
 
+# ver equipo conmas goles en contra 
 def equipo_com_mas_goles_contra(equipos):
     if not equipos:
         print("No hay equipos registrados.")
@@ -139,6 +142,7 @@ def equipo_com_mas_goles_contra(equipos):
     equipo_max_GC = max(equipos, key=lambda e: equipos[e]['GC'])
     print(f"El equipo con más goles en contra es: {equipo_max_GC} ({equipos[equipo_max_GC]['GC']} goles).")
 
+# ver plantilla de los equipos
 def ver_plantilla(equipos):
     nombre_equipo = input("Introduce el nombre del equipo para ver su plantilla: ").strip()
 
@@ -155,7 +159,7 @@ def ver_plantilla(equipos):
     for jugador in plantilla:
         print(f"{jugador['nombre']} - Dorsal: {jugador['dorsal']}, Posición: {jugador['posicion']}, Edad: {jugador['edad']}")
 
-
+# estadisticas
 def mostrar_tabla_posiciones(equipos):
     if not equipos:
         print("No hay equipos registrados.")
@@ -178,6 +182,7 @@ def mostrar_tabla_posiciones(equipos):
         print(f"{idx:<4} {fila['Equipo']:<20} {fila['PJ']:<3} {fila['PG']:<3} {fila['PE']:<3} {fila['PP']:<3} {fila['GF']:<3} {fila['GC']:<3} {fila['DG']:<4} {fila['PTS']:<4}")
     print("=" * 75)
 
+# definir el men de opciones
 def mainMenu():
     equipos = {}
     calendario = []
